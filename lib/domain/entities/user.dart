@@ -7,7 +7,7 @@ class User {
   Id? isarId = Isar.autoIncrement;
   final String name;
   final String lastname;
-  final DateTime birthDate;
+  final String birthDate;
   final List<String> addresses;
 
   User({
