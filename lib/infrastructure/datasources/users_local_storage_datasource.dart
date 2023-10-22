@@ -1,25 +1,12 @@
 import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:users_app/domain/domain.dart';
+import 'package:users_app/utils/utils.dart';
 
-class LocalStorageDatasource extends UsersDatasource {
+class UsersLocalStorageDatasource extends UsersDatasource {
   late Future<Isar> db;
 
-  LocalStorageDatasource() {
-    db = openDB();
-  }
-
-  Future<Isar> openDB() async {
-    if (Isar.instanceNames.isEmpty) {
-      final dir = await getApplicationDocumentsDirectory();
-      return await Isar.open(
-        [UserSchema],
-        directory: dir.path,
-        inspector: true,
-      );
-    }
-
-    return Future.value(Isar.getInstance());
+  UsersLocalStorageDatasource() {
+    db = locator.get<DB>().openDB();
   }
 
   @override
@@ -51,7 +38,7 @@ class LocalStorageDatasource extends UsersDatasource {
   @override
   Future<bool> updateUser(User user) async {
     final isar = await db;
-    await isar.users.put(user);
+    isar.writeTxnSync(() => isar.users.putSync(user));
 
     return true;
   }

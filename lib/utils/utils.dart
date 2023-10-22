@@ -8,4 +8,7 @@ export 'inputs/name.dart';
 export 'inputs/birth_date.dart';
 export 'inputs/lastname.dart';
 
+export 'db/db.dart';
+export 'db/locator.dart';
+
 export 'enums/form_enum.dart';

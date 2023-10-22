@@ -38,6 +38,7 @@ class UsersViewState extends ConsumerState<UsersView> {
     if (usersProviderRef.loading) {
       return const Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(),
             Text(Constants.loadingUsers),
@@ -49,6 +50,7 @@ class UsersViewState extends ConsumerState<UsersView> {
     if (usersProviderRef.users.isEmpty) {
       return const Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //imagen bad news
             Text(Constants.noUsers)

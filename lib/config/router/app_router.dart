@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:users_app/presentation/screens/screens.dart';
 import 'package:users_app/presentation/views/views.dart';
@@ -23,14 +22,6 @@ final appRouter = GoRouter(
           builder: (context, state) => const SettingsView(),
         )
       ],
-    ),
-    GoRoute(
-      path: Navigation.homeRoute,
-      builder: (context, state) => const Scaffold(
-        body: Center(
-          child: Text('Page Builder intro...'),
-        ),
-      ),
     )
   ],
 );
