@@ -19,6 +19,11 @@ class Constants {
   static const applicationColor = 'Color de la aplicación';
   static const saveConfiguration = 'Guardar';
   static const configurationSaved = 'Configuración guardada exitosamente';
+  static const userDetailTitle = 'Detalle del usuario';
+  static const loadingUser = 'Cargando usuario';
+  static const addresses = 'Direcciones del usuario';
+  static const deleteUser = 'Eliminar';
+  static const addAddress = 'Agregar dirección';
 
   static const colorList = <Color>[
     Colors.blue,

@@ -13,15 +13,24 @@ final appRouter = GoRouter(
           path: Navigation.registerRoute,
           builder: (context, state) => const RegisterView(),
         ),
-        GoRoute(
-          path: Navigation.usersRoute,
-          builder: (context, state) => const UsersView(),
-        ),
+        GoRoute(path: Navigation.usersRoute, builder: (context, state) => const UsersView(), routes: [
+          GoRoute(
+            path: Navigation.userDetailRouteDef,
+            builder: (context, state) {
+              final id = state.pathParameters['id'] ?? '0';
+              return UserDetailScreen(userId: int.parse(id));
+            },
+          )
+        ]),
         GoRoute(
           path: Navigation.settingsRoute,
           builder: (context, state) => const SettingsView(),
         )
       ],
+    ),
+    GoRoute(
+      path: Navigation.homeRoute,
+      redirect: (_, __) => Navigation.registerRoute,
     )
   ],
 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:users_app/presentation/providers/providers.dart';
 import 'package:users_app/presentation/widgets/users/users_list.dart';
+import 'package:users_app/presentation/widgets/widgets.dart';
 import 'package:users_app/utils/utils.dart';
 
 class UsersView extends ConsumerStatefulWidget {
@@ -21,6 +22,13 @@ class UsersViewState extends ConsumerState<UsersView> {
     loadNextPage();
   }
 
+  @override
+  void dispose() {
+    isLastPage = false;
+    isLoading = false;
+    super.dispose();
+  }
+
   void loadNextPage() async {
     if (isLastPage || isLoading) return;
 
@@ -36,15 +44,7 @@ class UsersViewState extends ConsumerState<UsersView> {
     final usersProviderRef = ref.watch(usersProvider);
 
     if (usersProviderRef.loading) {
-      return const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(),
-            Text(Constants.loadingUsers),
-          ],
-        ),
-      );
+      return const CustomLoading(message: Constants.loadingUsers);
     }
 
     if (usersProviderRef.users.isEmpty) {

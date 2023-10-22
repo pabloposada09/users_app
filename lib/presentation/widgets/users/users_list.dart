@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:users_app/domain/entities/user.dart';
+import 'package:users_app/utils/constants/constants.dart';
+import 'package:users_app/utils/constants/navigation.dart';
 
 class UsersList extends StatefulWidget {
   final List<User> users;
@@ -42,7 +45,9 @@ class _UsersListState extends State<UsersList> {
       itemBuilder: (context, index) {
         final user = widget.users[index];
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            context.push('${Navigation.usersRoute}${Navigation.userDetailRoute}${user.isarId}');
+          },
           title: Text(user.name),
           subtitle: Text(user.lastname),
           trailing: const Icon(Icons.arrow_forward_ios_rounded),

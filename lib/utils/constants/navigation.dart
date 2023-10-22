@@ -5,7 +5,8 @@ class Navigation {
 
   static const registerRoute = '/register';
   static const usersRoute = '/users';
-  static const userDetailRoute = 'user:id';
+  static const userDetailRouteDef = 'user/:id';
+  static const userDetailRoute = '/user/';
   static const settingsRoute = '/settings';
   static const homeRoute = '/';
 }

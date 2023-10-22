@@ -46,6 +46,9 @@ class RegisterView extends ConsumerWidget {
       handleState(next.formStatus, context);
     });
 
+    final size = MediaQuery.of(context).size;
+    final colors = Theme.of(context).colorScheme;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -58,6 +61,14 @@ class RegisterView extends ConsumerWidget {
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/icons/user-creation.png',
+                  width: size.width * 0.35,
+                  color: colors.primary,
+                ),
+                const SizedBox(
+                  height: ScreenMeasures.spaceBetweenElements,
+                ),
                 CustomFormField(
                   label: Constants.nameHint,
                   hintText: Constants.nameHint,
