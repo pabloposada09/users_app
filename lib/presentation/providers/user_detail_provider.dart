@@ -1,27 +1,42 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:users_app/domain/domain.dart';
 import 'package:users_app/presentation/providers/user_repository_provider.dart';
+import 'package:users_app/presentation/providers/users_provider.dart';
 import 'package:users_app/utils/constants/constants.dart';
 
 final userDetailProvider = StateNotifierProvider<UserDetailNotifier, UserDetailState>((ref) {
   final repository = ref.watch(userRepositoryProvider);
 
-  return UserDetailNotifier(getUserCallback: repository.getUserById);
+  final listCallback = ref.watch(usersProvider.notifier).updateList;
+
+  return UserDetailNotifier(usersRepository: repository, updateListCallBack: listCallback);
 });
 
-typedef GetUserCallback = Future<User> Function(int userId);
+typedef UpdateListCallBack = void Function(int userId);
 
 class UserDetailNotifier extends StateNotifier<UserDetailState> {
-  final GetUserCallback getUserCallback;
+  final UsersRepository usersRepository;
+  final UpdateListCallBack updateListCallBack;
 
-  UserDetailNotifier({required this.getUserCallback}) : super(UserDetailState());
+  UserDetailNotifier({required this.usersRepository, required this.updateListCallBack}) : super(UserDetailState());
 
   Future<void> loadUser(int userId) async {
     try {
-      final user = await getUserCallback(userId);
+      final user = await usersRepository.getUserById(userId);
       state = state.copyWith(user: user);
     } catch (e) {
       state = state.copyWith(error: Constants.error);
+    }
+  }
+
+  Future<bool> deleteUser(int userId) async {
+    try {
+      final status = await usersRepository.deleteUserById(userId);
+      state = state.copyWith(user: null);
+      updateListCallBack(userId);
+      return status;
+    } catch (e) {
+      return false;
     }
   }
 }

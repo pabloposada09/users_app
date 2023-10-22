@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:users_app/domain/domain.dart';
 import 'package:users_app/presentation/providers/user_repository_provider.dart';
 
-final usersProvider = StateNotifierProvider.autoDispose<UsersNotifier, UsersState>((ref) {
+final usersProvider = StateNotifierProvider<UsersNotifier, UsersState>((ref) {
   final callback = ref.watch(userRepositoryProvider).getUsers;
 
   return UsersNotifier(loadUsers: callback);
@@ -23,6 +23,17 @@ class UsersNotifier extends StateNotifier<UsersState> {
     state = state.copyWith(users: [...state.users, ...newUsers], loading: false);
 
     return newUsers;
+  }
+
+  void updateList(int userId) {
+    if (_checkUserExistance(userId)) {
+      state.users.removeWhere((element) => element.isarId == userId);
+      state = state.copyWith(users: state.users);
+    }
+  }
+
+  bool _checkUserExistance(int userId) {
+    return state.users.any((element) => element.isarId == userId);
   }
 }
 

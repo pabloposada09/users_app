@@ -13,9 +13,9 @@ class UsersLocalStorageDatasource extends UsersDatasource {
   Future<bool> deleteUserById(int userId) async {
     final isar = await db;
 
-    final response = await isar.users.delete(userId);
+    isar.writeTxnSync(() => isar.users.deleteSync(userId));
 
-    return response;
+    return true;
   }
 
   @override

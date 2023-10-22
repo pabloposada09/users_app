@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:users_app/domain/domain.dart';
 import 'package:users_app/presentation/providers/user_detail_provider.dart';
 import 'package:users_app/presentation/widgets/widgets.dart';
@@ -43,7 +45,7 @@ class UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                 ],
               ),
             ),
-      floatingActionButton: user.user == null ? null : const _UserOptions(),
+      floatingActionButton: user.user == null ? null : _UserOptions(user.user!.isarId!),
     );
   }
 }
@@ -132,11 +134,39 @@ class _UserAddresses extends StatelessWidget {
   }
 }
 
-class _UserOptions extends StatelessWidget {
-  const _UserOptions();
+class _UserOptions extends ConsumerWidget {
+  final int id;
+  const _UserOptions(this.id);
+
+  void handleDeleteUser(BuildContext context, WidgetRef ref) {
+    EasyLoading.show(status: Constants.loading);
+    ref.read(userDetailProvider.notifier).deleteUser(id).then((value) {
+      EasyLoading.dismiss();
+
+      if (value) {
+        Dialogs.showPopUp(
+          context,
+          Constants.userDeleted,
+          Constants.userDeletedDesc,
+          [
+            FilledButton(
+              onPressed: () {
+                context.pop();
+                context.go(Navigation.usersRoute);
+              },
+              child: const Text(Constants.accept),
+            )
+          ],
+        );
+        return;
+      }
+
+      Dialogs.showSnackBar(context, Constants.error);
+    });
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Stack(
       children: [
         Positioned(
@@ -147,7 +177,7 @@ class _UserOptions extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FilledButton.icon(
-                  onPressed: () {},
+                  onPressed: () => handleDeleteUser(context, ref),
                   icon: const Icon(
                     Icons.restore_from_trash_rounded,
                     color: Colors.red,
