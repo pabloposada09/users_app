@@ -13,13 +13,13 @@ class RegisterView extends ConsumerWidget {
     EasyLoading.dismiss();
 
     if (status == FormStatus.loading) {
-      EasyLoading.show(status: 'Loading...');
+      EasyLoading.show(status: Constants.loading);
       return;
     }
 
     if (status == FormStatus.successfullyPosted) {
       EasyLoading.showSuccess(
-        'Usuario creado correctamente',
+        Constants.userCreatedSuccessfully,
         duration: const Duration(seconds: 1),
         dismissOnTap: true,
       );
@@ -28,7 +28,7 @@ class RegisterView extends ConsumerWidget {
     }
 
     if (status == FormStatus.error) {
-      EasyLoading.showError('Ups, ocurrio un error');
+      EasyLoading.showError(Constants.error);
       return;
     }
   }
