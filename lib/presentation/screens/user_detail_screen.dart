@@ -3,7 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:users_app/domain/domain.dart';
-import 'package:users_app/presentation/providers/user_detail_provider.dart';
+import 'package:users_app/presentation/providers/providers.dart';
 import 'package:users_app/presentation/widgets/widgets.dart';
 import 'package:users_app/utils/utils.dart';
 
@@ -184,7 +184,7 @@ class _UserOptions extends ConsumerWidget {
                   ),
                   label: const Text(Constants.deleteUser)),
               FilledButton.icon(
-                onPressed: () {},
+                onPressed: () => context.push(Navigation.addressRoute),
                 icon: const Icon(Icons.add),
                 label: const Text(Constants.addAddress),
               )

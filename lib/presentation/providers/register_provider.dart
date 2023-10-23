@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:users_app/domain/domain.dart';
@@ -13,6 +14,7 @@ final registerFormProvider = StateNotifierProvider.autoDispose<RegisterNotifier,
 typedef UserCreationCallback = Future<bool> Function(User user);
 
 class RegisterNotifier extends StateNotifier<RegisterFormState> {
+  final GlobalKey<FormState> registerKey = GlobalKey<FormState>();
   final UserCreationCallback createUser;
 
   RegisterNotifier({required this.createUser}) : super(RegisterFormState());
@@ -58,6 +60,9 @@ class RegisterNotifier extends StateNotifier<RegisterFormState> {
 
         if (response) {
           state = state.copyWith(formStatus: FormStatus.successfullyPosted);
+
+          registerKey.currentState?.reset();
+
           return;
         }
 

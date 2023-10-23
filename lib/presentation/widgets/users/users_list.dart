@@ -46,7 +46,7 @@ class _UsersListState extends State<UsersList> {
         final user = widget.users[index];
         return ListTile(
           onTap: () {
-            context.push('${Navigation.usersRoute}${Navigation.userDetailRoute}${user.isarId}');
+            context.go('${Navigation.usersRoute}${Navigation.userDetailRoute}${user.isarId}');
           },
           title: Text(user.name),
           subtitle: Text(user.lastname),

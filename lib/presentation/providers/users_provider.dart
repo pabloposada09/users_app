@@ -11,23 +11,28 @@ final usersProvider = StateNotifierProvider<UsersNotifier, UsersState>((ref) {
 typedef LoadUsersCallback = Future<List<User>> Function({int limit, int offset});
 
 class UsersNotifier extends StateNotifier<UsersState> {
-  int currentPage = 0;
   final LoadUsersCallback loadUsers;
 
   UsersNotifier({required this.loadUsers}) : super(UsersState());
 
   Future<List<User>> loadNextPage() async {
-    final newUsers = await loadUsers(limit: 10, offset: currentPage * 10);
-    currentPage++;
+    final newUsers = await loadUsers(limit: 10, offset: state.users.length);
 
     state = state.copyWith(users: [...state.users, ...newUsers], loading: false);
 
     return newUsers;
   }
 
-  void updateList(int userId) {
+  void deleteUserFromList(int userId) {
     if (_checkUserExistance(userId)) {
       state.users.removeWhere((element) => element.isarId == userId);
+      state = state.copyWith(users: state.users);
+    }
+  }
+
+  void updateUserInList(User user) {
+    if (_checkUserExistance(user.isarId!)) {
+      state.users[state.users.indexWhere((element) => element.isarId == user.isarId)] = user;
       state = state.copyWith(users: state.users);
     }
   }

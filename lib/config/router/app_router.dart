@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:users_app/presentation/screens/address_screen.dart';
 import 'package:users_app/presentation/screens/screens.dart';
 import 'package:users_app/presentation/views/views.dart';
 import 'package:users_app/utils/utils.dart';
@@ -27,6 +28,10 @@ final appRouter = GoRouter(
           builder: (context, state) => const SettingsView(),
         )
       ],
+    ),
+    GoRoute(
+      path: Navigation.addressRoute,
+      builder: (context, state) => const AddressScreen(),
     ),
     GoRoute(
       path: Navigation.homeRoute,

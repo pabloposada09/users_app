@@ -27,6 +27,9 @@ class Constants {
   static const accept = 'Aceptar';
   static const userDeleted = 'Usuario eliminado';
   static const userDeletedDesc = 'Usuario eliminado correctamente';
+  static const addressesTitle = 'Agregar dirección';
+  static const addressAddTitle = 'Dirección agregada';
+  static const addressAddDesc = 'Dirección agregada exitosamente';
 
   static const colorList = <Color>[
     Colors.blue,

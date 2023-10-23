@@ -18,12 +18,8 @@ class RegisterView extends ConsumerWidget {
     }
 
     if (status == FormStatus.successfullyPosted) {
-      EasyLoading.showSuccess(
-        Constants.userCreatedSuccessfully,
-        duration: const Duration(seconds: 1),
-        dismissOnTap: true,
-      );
-      context.go(Navigation.usersRoute);
+      Dialogs.showSnackBar(context, Constants.userCreatedSuccessfully);
+
       return;
     }
 
@@ -58,61 +54,62 @@ class RegisterView extends ConsumerWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Form(
+                key: ref.read(registerFormProvider.notifier).registerKey,
                 child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/icons/user-creation.png',
-                  width: size.width * 0.35,
-                  color: colors.primary,
-                ),
-                const SizedBox(
-                  height: ScreenMeasures.spaceBetweenElements,
-                ),
-                CustomFormField(
-                  label: Constants.nameHint,
-                  hintText: Constants.nameHint,
-                  onChanged: ref.read(registerFormProvider.notifier).nameChanged,
-                  errorText: registerProvider.formStatus == FormStatus.posted ? name.errorMessage : null,
-                ),
-                const SizedBox(
-                  height: ScreenMeasures.spaceBetweenElements,
-                ),
-                CustomFormField(
-                  label: Constants.lastnameHint,
-                  hintText: Constants.lastnameHint,
-                  onChanged: ref.read(registerFormProvider.notifier).lastnameChanged,
-                  errorText: registerProvider.formStatus == FormStatus.posted ? lastname.errorMessage : null,
-                ),
-                const SizedBox(
-                  height: ScreenMeasures.spaceBetweenElements,
-                ),
-                CustomFormField(
-                  label: Constants.addressHint,
-                  hintText: Constants.addressHint,
-                  onChanged: ref.read(registerFormProvider.notifier).addressChanged,
-                  errorText: registerProvider.formStatus == FormStatus.posted ? address.errorMessage : null,
-                ),
-                const SizedBox(
-                  height: ScreenMeasures.spaceBetweenElements,
-                ),
-                CustomDatePicker(
-                  title: Constants.birthDate,
-                  label: Constants.birthDate,
-                  hint: Constants.birthDate,
-                  onChanged: ref.read(registerFormProvider.notifier).birthDateChanged,
-                  errorMessage: registerProvider.formStatus == FormStatus.posted ? birthDate.errorMessage : null,
-                ),
-                const SizedBox(
-                  height: ScreenMeasures.spaceBetweenElements,
-                ),
-                FilledButton.icon(
-                  onPressed: ref.read(registerFormProvider.notifier).onFormSubmit,
-                  icon: const Icon(Icons.add),
-                  label: const Text(Constants.createUser),
-                )
-              ],
-            )),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/icons/user-creation.png',
+                      width: size.width * 0.35,
+                      color: colors.primary,
+                    ),
+                    const SizedBox(
+                      height: ScreenMeasures.spaceBetweenElements,
+                    ),
+                    CustomFormField(
+                      label: Constants.nameHint,
+                      hintText: Constants.nameHint,
+                      onChanged: ref.read(registerFormProvider.notifier).nameChanged,
+                      errorText: registerProvider.formStatus == FormStatus.posted ? name.errorMessage : null,
+                    ),
+                    const SizedBox(
+                      height: ScreenMeasures.spaceBetweenElements,
+                    ),
+                    CustomFormField(
+                      label: Constants.lastnameHint,
+                      hintText: Constants.lastnameHint,
+                      onChanged: ref.read(registerFormProvider.notifier).lastnameChanged,
+                      errorText: registerProvider.formStatus == FormStatus.posted ? lastname.errorMessage : null,
+                    ),
+                    const SizedBox(
+                      height: ScreenMeasures.spaceBetweenElements,
+                    ),
+                    CustomFormField(
+                      label: Constants.addressHint,
+                      hintText: Constants.addressHint,
+                      onChanged: ref.read(registerFormProvider.notifier).addressChanged,
+                      errorText: registerProvider.formStatus == FormStatus.posted ? address.errorMessage : null,
+                    ),
+                    const SizedBox(
+                      height: ScreenMeasures.spaceBetweenElements,
+                    ),
+                    CustomDatePicker(
+                      title: Constants.birthDate,
+                      label: Constants.birthDate,
+                      hint: Constants.birthDate,
+                      onChanged: ref.read(registerFormProvider.notifier).birthDateChanged,
+                      errorMessage: registerProvider.formStatus == FormStatus.posted ? birthDate.errorMessage : null,
+                    ),
+                    const SizedBox(
+                      height: ScreenMeasures.spaceBetweenElements,
+                    ),
+                    FilledButton.icon(
+                      onPressed: ref.read(registerFormProvider.notifier).onFormSubmit,
+                      icon: const Icon(Icons.add),
+                      label: const Text(Constants.createUser),
+                    )
+                  ],
+                )),
           ),
         ),
       ),

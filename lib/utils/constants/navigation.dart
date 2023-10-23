@@ -9,4 +9,5 @@ class Navigation {
   static const userDetailRoute = '/user/';
   static const settingsRoute = '/settings';
   static const homeRoute = '/';
+  static const addressRoute = '/address';
 }

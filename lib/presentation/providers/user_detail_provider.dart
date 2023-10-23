@@ -7,7 +7,7 @@ import 'package:users_app/utils/constants/constants.dart';
 final userDetailProvider = StateNotifierProvider<UserDetailNotifier, UserDetailState>((ref) {
   final repository = ref.watch(userRepositoryProvider);
 
-  final listCallback = ref.watch(usersProvider.notifier).updateList;
+  final listCallback = ref.watch(usersProvider.notifier).deleteUserFromList;
 
   return UserDetailNotifier(usersRepository: repository, updateListCallBack: listCallback);
 });
@@ -38,6 +38,10 @@ class UserDetailNotifier extends StateNotifier<UserDetailState> {
     } catch (e) {
       return false;
     }
+  }
+
+  void updateUser(User user) {
+    state = state.copyWith(user: user);
   }
 }
 

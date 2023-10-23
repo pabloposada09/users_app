@@ -17,4 +17,19 @@ class User {
     required this.birthDate,
     required this.addresses,
   });
+
+  User copyWith({
+    Id? isarId,
+    String? name,
+    String? lastname,
+    String? birthDate,
+    List<String>? addresses,
+  }) =>
+      User(
+        isarId: isarId ?? this.isarId,
+        name: name ?? this.name,
+        lastname: lastname ?? this.lastname,
+        birthDate: birthDate ?? this.birthDate,
+        addresses: addresses ?? this.addresses,
+      );
 }
