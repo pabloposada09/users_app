@@ -152,7 +152,7 @@ class _UserOptions extends ConsumerWidget {
             FilledButton(
               onPressed: () {
                 context.pop();
-                context.go(Navigation.usersRoute);
+                context.go('${Navigation.homeRoute}1');
               },
               child: const Text(Constants.accept),
             )

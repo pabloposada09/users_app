@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:users_app/presentation/providers/register_provider.dart';
 import 'package:users_app/presentation/widgets/widgets.dart';
 import 'package:users_app/utils/utils.dart';

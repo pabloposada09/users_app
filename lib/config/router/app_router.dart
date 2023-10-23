@@ -1,20 +1,18 @@
 import 'package:go_router/go_router.dart';
 import 'package:users_app/presentation/screens/address_screen.dart';
 import 'package:users_app/presentation/screens/screens.dart';
-import 'package:users_app/presentation/views/views.dart';
 import 'package:users_app/utils/utils.dart';
 
 final appRouter = GoRouter(
-  initialLocation: Navigation.registerRoute,
+  initialLocation: Navigation.defaultRoute,
   routes: [
-    ShellRoute(
-      builder: (context, state, child) => HomeScreen(child: child),
-      routes: [
-        GoRoute(
-          path: Navigation.registerRoute,
-          builder: (context, state) => const RegisterView(),
-        ),
-        GoRoute(path: Navigation.usersRoute, builder: (context, state) => const UsersView(), routes: [
+    GoRoute(
+        path: Navigation.homeRouteDef,
+        builder: (context, state) {
+          final page = state.pathParameters['page'] ?? '0';
+          return HomeScreen(pageIndex: int.parse(page));
+        },
+        routes: [
           GoRoute(
             path: Navigation.userDetailRouteDef,
             builder: (context, state) {
@@ -23,19 +21,13 @@ final appRouter = GoRouter(
             },
           )
         ]),
-        GoRoute(
-          path: Navigation.settingsRoute,
-          builder: (context, state) => const SettingsView(),
-        )
-      ],
-    ),
     GoRoute(
       path: Navigation.addressRoute,
       builder: (context, state) => const AddressScreen(),
     ),
     GoRoute(
-      path: Navigation.homeRoute,
-      redirect: (_, __) => Navigation.registerRoute,
+      path: Navigation.defaultRoute,
+      redirect: (_, __) => '${Navigation.homeRoute}0',
     )
   ],
 );
