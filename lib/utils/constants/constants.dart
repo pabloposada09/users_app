@@ -38,7 +38,7 @@ class Constants {
     Colors.red,
     Colors.purple,
     Colors.deepPurple,
-    Colors.orange,
+    Colors.grey,
     Colors.pink,
     Colors.pinkAccent
   ];

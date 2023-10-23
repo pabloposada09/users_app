@@ -5,9 +5,14 @@ import 'package:users_app/presentation/providers/register_provider.dart';
 import 'package:users_app/presentation/widgets/widgets.dart';
 import 'package:users_app/utils/utils.dart';
 
-class RegisterView extends ConsumerWidget {
+class RegisterView extends ConsumerStatefulWidget {
   const RegisterView({super.key});
 
+  @override
+  RegisterViewState createState() => RegisterViewState();
+}
+
+class RegisterViewState extends ConsumerState<RegisterView> {
   void handleState(FormStatus status, BuildContext context) {
     EasyLoading.dismiss();
 
@@ -29,7 +34,7 @@ class RegisterView extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
     final registerProvider = ref.watch(registerFormProvider);
 
     final name = registerProvider.name;

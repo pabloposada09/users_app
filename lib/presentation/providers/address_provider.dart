@@ -61,8 +61,11 @@ class AddressNotifier extends StateNotifier<AddressState> {
 
         if (response) {
           state = state.copyWith(formStatus: FormStatus.successfullyPosted);
+
+          state = AddressState();
           updateUserProviderCallback(user);
           updateUsersListProviderCallback(user);
+
           return;
         }
 

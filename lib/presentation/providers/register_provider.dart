@@ -61,6 +61,8 @@ class RegisterNotifier extends StateNotifier<RegisterFormState> {
         if (response) {
           state = state.copyWith(formStatus: FormStatus.successfullyPosted);
 
+          state = RegisterFormState();
+
           registerKey.currentState?.reset();
 
           return;

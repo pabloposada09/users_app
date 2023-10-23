@@ -48,7 +48,7 @@ class SettingsView extends ConsumerWidget {
                       onChanged: ref.read(themeProvider.notifier).changeColor,
                       activeColor: color,
                       title: Text(
-                        color.toString(),
+                        'Color : ${color.value}',
                         style: TextStyle(fontWeight: FontWeight.normal, color: color),
                       ),
                     );
