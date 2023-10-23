@@ -1,3 +1,6 @@
-# users_app
+# Aplicación creación usuarios
 
-A new Flutter project.
+# DEV
+
+1. Ejecutar el comando flutter packages get 
+2. Ejecutar el comando flutter run
