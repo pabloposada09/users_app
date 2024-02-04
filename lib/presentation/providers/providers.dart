@@ -5,3 +5,4 @@ export 'users_provider.dart';
 export 'address_provider.dart';
 export 'theme_provider.dart';
 export 'theme_repository_provider.dart';
+export 'gifs_provider.dart';

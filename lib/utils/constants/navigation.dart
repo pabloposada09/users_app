@@ -2,6 +2,7 @@ class Navigation {
   static const registerLabel = 'Registro';
   static const usersLabel = 'Usuarios';
   static const settingsLabel = 'Configuración';
+  static const gifsLabel = 'Gifs';
 
   static const defaultRoute = '/';
   static const homeRouteDef = '/home/:page';

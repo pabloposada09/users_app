@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:users_app/presentation/views/search_gif_view.dart';
 import 'package:users_app/presentation/views/views.dart';
 import 'package:users_app/presentation/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   final int pageIndex;
 
-  const HomeScreen({super.key, required this.pageIndex});
+  HomeScreen({super.key, required this.pageIndex});
 
-  final viewRoutes = const <Widget>[
-    RegisterView(),
-    UsersView(),
-    SettingsView(),
+  final viewRoutes = <Widget>[
+    const RegisterView(),
+    const UsersView(),
+    SearchGifView(),
+    const SettingsView(),
   ];
 
   @override
